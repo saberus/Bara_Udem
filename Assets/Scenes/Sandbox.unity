@@ -191,6 +191,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Bld_Hut_01
       objectReference: {fileID: 0}
+    - target: {fileID: 196646, guid: 5a346deceb21d0c4781e67a70fbcc1f6, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 409538, guid: 5a346deceb21d0c4781e67a70fbcc1f6, type: 3}
       propertyPath: m_RootOrder
       value: 11
@@ -2099,36 +2103,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9c9cde784878b7741856ba6c359908a3, type: 3}
---- !u!1 &3780972105612221712 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5271039343987855365, guid: 9c9cde784878b7741856ba6c359908a3, type: 3}
-  m_PrefabInstance: {fileID: 3780972105612221711}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3780972105612221722 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4868873157842371484, guid: 9c9cde784878b7741856ba6c359908a3, type: 3}
   m_PrefabInstance: {fileID: 3780972105612221711}
   m_PrefabAsset: {fileID: 0}
---- !u!95 &3780972105612221723
-Animator:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3780972105612221712}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &4774106992615572628
 PrefabInstance:
   m_ObjectHideFlags: 0
