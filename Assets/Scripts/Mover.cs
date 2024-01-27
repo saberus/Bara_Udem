@@ -20,10 +20,22 @@ public class Mover : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-           lastRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+            MoveToCursore();
         }
-        Debug.DrawRay(lastRay.origin, lastRay.direction * 100);
+        //Debug.DrawRay(lastRay.origin, lastRay.direction * 100);
 
-        gameObject.GetComponent<NavMeshAgent>().destination = target.position;
+
+        //gameObject.GetComponent<NavMeshAgent>().destination = target.position;
+    }
+
+    private void MoveToCursore()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+        bool hasHit = Physics.Raycast(ray, out hit, 1000);
+        if (hasHit)
+        {
+            GetComponent<NavMeshAgent>().destination = hit.point;
+        }
     }
 }
