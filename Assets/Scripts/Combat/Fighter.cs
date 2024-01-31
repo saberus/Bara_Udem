@@ -6,11 +6,10 @@ namespace RPG.Combat
 {
     public class Fighter : MonoBehaviour, IAction
     {
-        [SerializeField]
-        float weaponRange = 2f;
-        [SerializeField]
-        float timeBetweenAttacks = 1f;
-
+        [SerializeField] float weaponRange = 2f;
+        [SerializeField] float timeBetweenAttacks = 1f;
+        [SerializeField] float weaponDamage = 5f;
+        
         Transform target;
         float timeSinceLastAttack = 0;
 
@@ -38,9 +37,17 @@ namespace RPG.Combat
         {
             if (timeSinceLastAttack > timeBetweenAttacks)
             {
+                //THIS WILL TRIGGER THE Hit() event
                 GetComponent<Animator>().SetTrigger("attack");
                 timeSinceLastAttack = 0;
             }
+        }
+
+        //Handle a hit animation event
+        void Hit()
+        {
+            Health healthComponent = target.GetComponent<Health>();
+            healthComponent.TakeDamage(weaponDamage);
         }
 
         private bool GetIsInRange()
@@ -59,10 +66,5 @@ namespace RPG.Combat
             target = null;
         }
 
-        //Handle a hit animation event
-        void Hit()
-        {
-            print("hit!!");
-        }
     }
 }
