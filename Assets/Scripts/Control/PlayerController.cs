@@ -6,6 +6,12 @@ namespace RPG.Control
 {
     public class PlayerController : MonoBehaviour
     {
+        Fighter fighter;
+
+        private void Start()
+        {
+            fighter = GetComponent<Fighter>();
+        }
         // Update is called once per frame
         void Update()
         {
@@ -19,11 +25,11 @@ namespace RPG.Control
             foreach(RaycastHit hit in hits)
             {
                 CombatTarget target = hit.transform.GetComponent<CombatTarget>();
-                if (target == null) continue;
+                if (!fighter.CanAttack(target)) continue;
 
                 if (Input.GetMouseButtonDown(0))
                 {
-                    GetComponent<Fighter>().Attack(target);
+                    fighter.Attack(target);
                 }
                 return true;
             }
