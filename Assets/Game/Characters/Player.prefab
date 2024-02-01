@@ -72,6 +72,10 @@ PrefabInstance:
       propertyPath: health
       value: 30
       objectReference: {fileID: 0}
+    - target: {fileID: -3450340001787849800, guid: 9c9cde784878b7741856ba6c359908a3, type: 3}
+      propertyPath: healthPoints
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 3329384610902015028, guid: 9c9cde784878b7741856ba6c359908a3, type: 3}
       propertyPath: weaponRange
       value: 1
@@ -126,6 +130,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5271039343987855365, guid: 9c9cde784878b7741856ba6c359908a3, type: 3}
       propertyPath: m_Name
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 5271039343987855365, guid: 9c9cde784878b7741856ba6c359908a3, type: 3}
+      propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
