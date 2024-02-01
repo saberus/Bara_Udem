@@ -12,6 +12,7 @@ namespace RPG.Control
 
         [SerializeField] float chaseDistance = 5f;
         [SerializeField] float suspicionTime = 3f;
+        [SerializeField] float waypointDwellTime = 3f;
         [SerializeField] PatrolPath patrolPath;
         [SerializeField] float waypointTolerance = 1f;
 
@@ -24,6 +25,7 @@ namespace RPG.Control
 
         Vector3 guardPosition;
         float timeSinceLastSawPlayer = Mathf.Infinity;
+        float timeSinceArrivedAtWaypoint = Mathf.Infinity;
 
         private void Start()
         {
@@ -37,9 +39,8 @@ namespace RPG.Control
         private void Update()
         {
             if (health.IsDead()) return;
-            if(InAttackRangeOfPlayer(player) && fighter.CanAttack(player))
+            if (InAttackRangeOfPlayer(player) && fighter.CanAttack(player))
             {
-                timeSinceLastSawPlayer = 0;
                 AttackBehaviour();
             }
             else if (timeSinceLastSawPlayer < suspicionTime)
@@ -51,7 +52,13 @@ namespace RPG.Control
                 PatrolBehaviour();
             }
 
+            UpdateTimers();
+        }
+
+        private void UpdateTimers()
+        {
             timeSinceLastSawPlayer += Time.deltaTime;
+            timeSinceArrivedAtWaypoint += Time.deltaTime;
         }
 
         private void PatrolBehaviour()
@@ -62,12 +69,16 @@ namespace RPG.Control
             {
                 if (AtWaypoint())
                 {
+                    timeSinceArrivedAtWaypoint = 0f;
                     CicleWaypoint();
                 }
                 nextPosition = GetCurrentWaypoint();
             }
-            //this will automatically cancel the fighting
-            mover.StartMoveAction(nextPosition);
+            if(timeSinceArrivedAtWaypoint > waypointDwellTime)
+            {
+                //this will automatically cancel the fighting
+                mover.StartMoveAction(nextPosition);
+            }
         }
 
         private bool AtWaypoint()
@@ -93,6 +104,7 @@ namespace RPG.Control
 
         private void AttackBehaviour()
         {
+            timeSinceLastSawPlayer = 0;
             fighter.Attack(player.gameObject);
             print("Should chase : " + name);
         }
