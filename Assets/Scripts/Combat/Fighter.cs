@@ -1,5 +1,6 @@
 ﻿using RPG.Core;
 using RPG.Movement;
+using System;
 using UnityEngine;
 
 namespace RPG.Combat
@@ -9,9 +10,16 @@ namespace RPG.Combat
         [SerializeField] float weaponRange = 2f;
         [SerializeField] float timeBetweenAttacks = 1f;
         [SerializeField] float weaponDamage = 5f;
+        [SerializeField] GameObject weaponPrefab = null;
+        [SerializeField] Transform handTransform = null;
         
         Health target;
         float timeSinceLastAttack = Mathf.Infinity;
+
+        private void Start()
+        {
+            SpawnWeapon();
+        }
 
         private void Update()
         {
@@ -33,39 +41,6 @@ namespace RPG.Combat
             }
         }
 
-        private void AttackBehaviour()
-        {
-            transform.LookAt(target.transform);
-            if (timeSinceLastAttack > timeBetweenAttacks)
-            {
-                TriggerAttack();
-                timeSinceLastAttack = 0;
-            }
-        }
-
-        //Handle a hit animation event
-        void Hit()
-        {
-            if (target == null) return;
-            target.TakeDamage(weaponDamage);
-        }
-
-        private bool GetIsInRange()
-        {
-            return Vector3.Distance(transform.position, target.transform.position) < weaponRange;
-        }
-
-        private void TriggerAttack()
-        {
-            //THIS WILL TRIGGER THE Hit() event
-            GetComponent<Animator>().ResetTrigger("stopAttack");
-            GetComponent<Animator>().SetTrigger("attack");
-        }
-        private void StopAttack()
-        {
-            GetComponent<Animator>().ResetTrigger("attack");
-            GetComponent<Animator>().SetTrigger("stopAttack");
-        }
         public bool CanAttack(GameObject combatTarget)
         {
             if(combatTarget == null) return false;  
@@ -84,6 +59,45 @@ namespace RPG.Combat
             StopAttack();
             target = null;
             GetComponent<Mover>().Cancel();
+        }
+
+        //Handle a hit animation event
+        void Hit()
+        {
+            if (target == null) return;
+            target.TakeDamage(weaponDamage);
+        }
+
+        private void AttackBehaviour()
+        {
+            transform.LookAt(target.transform);
+            if (timeSinceLastAttack > timeBetweenAttacks)
+            {
+                TriggerAttack();
+                timeSinceLastAttack = 0;
+            }
+        }
+
+        private bool GetIsInRange()
+        {
+            return Vector3.Distance(transform.position, target.transform.position) < weaponRange;
+        }
+
+        private void TriggerAttack()
+        {
+            //THIS WILL TRIGGER THE Hit() event
+            GetComponent<Animator>().ResetTrigger("stopAttack");
+            GetComponent<Animator>().SetTrigger("attack");
+        }
+        private void StopAttack()
+        {
+            GetComponent<Animator>().ResetTrigger("attack");
+            GetComponent<Animator>().SetTrigger("stopAttack");
+        }
+
+        private void SpawnWeapon()
+        {
+            GameObject.Instantiate(weaponPrefab, handTransform);
         }
     }
 }
