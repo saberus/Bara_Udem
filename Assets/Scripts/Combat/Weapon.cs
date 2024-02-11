@@ -9,15 +9,18 @@ namespace RPG.Combat
         [SerializeField] GameObject equippedPrefab = null;
         [SerializeField] float weaponDamage = 5f;
         [SerializeField] float weaponRange = 2f;
+        [SerializeField] bool isRightHanded = true;
 
         //created not like in the course. Read the difference in getters
         public float WeaponDamage { get => weaponDamage;}
         public float WeaponRange { get => weaponRange; }
 
-        public void Spawn(Transform handTransform, Animator animator)
+        public void Spawn(Transform rightHand, Transform leftHand, Animator animator)
         {
             if(equippedPrefab != null)
             {
+                Transform handTransform = isRightHanded ? rightHand : leftHand;
+
                 Instantiate(equippedPrefab, handTransform);
             }
             if (animatorOverride != null)

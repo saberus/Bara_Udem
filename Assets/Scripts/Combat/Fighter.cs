@@ -8,7 +8,8 @@ namespace RPG.Combat
     public class Fighter : MonoBehaviour, IAction
     {
         [SerializeField] float timeBetweenAttacks = 1f;
-        [SerializeField] Transform handTransform = null;
+        [SerializeField] Transform rightHandTransform = null;
+        [SerializeField] Transform leftHandTransform = null;
         [SerializeField] Weapon defaultWeapon = null;
         
         Health target;
@@ -64,7 +65,18 @@ namespace RPG.Combat
         {
             currentWeapon = weapon;
             Animator animator = GetComponent<Animator>();
-            weapon.Spawn(handTransform, animator);
+            weapon.Spawn(rightHandTransform, leftHandTransform, animator);
+        }
+
+        //Handle a shoot animation event
+        void Shoot()
+        {
+            if(target == null) return;
+            print("shoot a projectile");
+            //call projectile
+            //pass target
+            
+            //target.TakeDamage(currentWeapon.WeaponDamage);
         }
 
         //Handle a hit animation event
