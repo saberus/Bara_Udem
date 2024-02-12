@@ -1,3 +1,4 @@
+using RPG.Core;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ namespace RPG.Combat
     {
         [SerializeField] float projectileSpeed = 5f;
 
-        [SerializeField] Transform target = null;
+        Health target = null;
 
         private void Update()
         {
@@ -18,11 +19,16 @@ namespace RPG.Combat
             transform.Translate(Vector3.forward * projectileSpeed * Time.deltaTime);
         }
 
+        public void SetTarget(Health target)
+        {
+            this.target = target;
+        }
+
         private Vector3 GetAimLocation()
         {
             CapsuleCollider targetCapsule = target.GetComponent<CapsuleCollider>();
-            if(targetCapsule == null) return target.position;
-            return target.position + Vector3.up * targetCapsule.height / 2;
+            if(targetCapsule == null) return target.transform.position;
+            return target.transform.position + Vector3.up * targetCapsule.height / 2;
         }
     }
 }

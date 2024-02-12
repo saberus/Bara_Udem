@@ -105,8 +105,8 @@
     ],
     "m_VertexContext": {
         "m_Position": {
-            "x": 0.0,
-            "y": 0.0
+            "x": 59.0,
+            "y": -64.0
         },
         "m_Blocks": [
             {
@@ -122,8 +122,8 @@
     },
     "m_FragmentContext": {
         "m_Position": {
-            "x": 0.0,
-            "y": 200.0
+            "x": 59.0,
+            "y": 164.0
         },
         "m_Blocks": [
             {
@@ -257,7 +257,7 @@
         "x"
     ],
     "m_Precision": 0,
-    "m_PreviewExpanded": false,
+    "m_PreviewExpanded": true,
     "m_PreviewMode": 0,
     "m_CustomColors": {
         "m_SerializableColors": []

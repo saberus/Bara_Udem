@@ -1,3 +1,4 @@
+using RPG.Core;
 using UnityEngine;
 
 namespace RPG.Combat
@@ -10,6 +11,7 @@ namespace RPG.Combat
         [SerializeField] float weaponDamage = 5f;
         [SerializeField] float weaponRange = 2f;
         [SerializeField] bool isRightHanded = true;
+        [SerializeField] Projectile projectile = null;
 
         //created not like in the course. Read the difference in getters
         public float WeaponDamage { get => weaponDamage;}
@@ -19,7 +21,7 @@ namespace RPG.Combat
         {
             if(equippedPrefab != null)
             {
-                Transform handTransform = isRightHanded ? rightHand : leftHand;
+                Transform handTransform = GetTransform(rightHand, leftHand);
 
                 Instantiate(equippedPrefab, handTransform);
             }
@@ -27,6 +29,20 @@ namespace RPG.Combat
             {
                 animator.runtimeAnimatorController = animatorOverride;
             }
+        }
+
+        public void LaunchProjectile(Transform rightHand, Transform leftHand, Health target)
+        {
+            Projectile projectileInstance = Instantiate(projectile, GetTransform(rightHand, leftHand).position, Quaternion.identity);
+            projectileInstance.SetTarget(target);
+        }
+        public bool HasProjectile()
+        {
+            return projectile != null;
+        }
+        private Transform GetTransform(Transform rightHand, Transform leftHand)
+        {
+            return isRightHanded ? rightHand : leftHand;
         }
     }
 }
