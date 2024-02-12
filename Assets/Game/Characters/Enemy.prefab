@@ -16,6 +16,26 @@ PrefabInstance:
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3329384610902015028, guid: 9c9cde784878b7741856ba6c359908a3, type: 3}
+      propertyPath: weapon
+      value: 
+      objectReference: {fileID: 11400000, guid: 7761eb43e0a03494cb90288a68fc0f0a, type: 2}
+    - target: {fileID: 3329384610902015028, guid: 9c9cde784878b7741856ba6c359908a3, type: 3}
+      propertyPath: defaultWeapon
+      value: 
+      objectReference: {fileID: 11400000, guid: 7761eb43e0a03494cb90288a68fc0f0a, type: 2}
+    - target: {fileID: 3329384610902015028, guid: 9c9cde784878b7741856ba6c359908a3, type: 3}
+      propertyPath: handTransform
+      value: 
+      objectReference: {fileID: 9053143837038298958}
+    - target: {fileID: 3329384610902015028, guid: 9c9cde784878b7741856ba6c359908a3, type: 3}
+      propertyPath: leftHandTransform
+      value: 
+      objectReference: {fileID: 9053143837038241612}
+    - target: {fileID: 3329384610902015028, guid: 9c9cde784878b7741856ba6c359908a3, type: 3}
+      propertyPath: rightHandTransform
+      value: 
+      objectReference: {fileID: 9053143837038298958}
+    - target: {fileID: 3329384610902015028, guid: 9c9cde784878b7741856ba6c359908a3, type: 3}
       propertyPath: timeBetweenAttacks
       value: 2
       objectReference: {fileID: 0}
@@ -118,6 +138,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chaseDistance: 5
+  suspicionTime: 3
+  waypointDwellTime: 3
+  patrolPath: {fileID: 0}
+  waypointTolerance: 1
+  patrolSpeedFraction: 0.2
 --- !u!4 &5454951012468674114 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4868873157842371484, guid: 9c9cde784878b7741856ba6c359908a3, type: 3}
@@ -180,3 +205,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 30cf93deff988e74e88a144bd2127c18, type: 3}
+--- !u!4 &9053143837038241612 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 481036, guid: 30cf93deff988e74e88a144bd2127c18, type: 3}
+  m_PrefabInstance: {fileID: 9053143837037899840}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &9053143837038298958 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 423694, guid: 30cf93deff988e74e88a144bd2127c18, type: 3}
+  m_PrefabInstance: {fileID: 9053143837037899840}
+  m_PrefabAsset: {fileID: 0}
