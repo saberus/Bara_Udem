@@ -71,19 +71,26 @@ namespace RPG.Combat
         //Handle a shoot animation event
         void Shoot()
         {
-            if(target == null) return;
-            print("shoot a projectile");
-            //call projectile
-            //pass target
-            
-            //target.TakeDamage(currentWeapon.WeaponDamage);
+            //if(target == null) return;
+            //print("shoot a projectile");
+            ////call projectile
+            ////pass target
+
+            ////target.TakeDamage(currentWeapon.WeaponDamage);
+            Hit();
         }
 
         //Handle a hit animation event
         void Hit()
         {
             if (target == null) return;
-            target.TakeDamage(currentWeapon.WeaponDamage);
+            if (currentWeapon.HasProjectile())
+            {
+                currentWeapon.LaunchProjectile(rightHandTransform, leftHandTransform, target);
+            } else
+            {
+                target.TakeDamage(currentWeapon.WeaponDamage);
+            }
         }
 
         private void AttackBehaviour()
