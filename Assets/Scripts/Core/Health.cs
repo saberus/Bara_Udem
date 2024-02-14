@@ -17,7 +17,7 @@ namespace RPG.Core
 
         public void TakeDamage(float damage)
         {
-
+            print(name + " taking "+ damage + " damage");
             healthPoints = Mathf.Max(healthPoints - damage, 0);
 
             print(healthPoints);
