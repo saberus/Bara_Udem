@@ -10,7 +10,10 @@ namespace RPG.Combat
     {
         [SerializeField] float projectileSpeed = 5f;
         [SerializeField] bool isHoming = false;
+        [SerializeField] float maxLifeTime = 20f;
+        [SerializeField] float lifeAfterImpact = 2f;
         [SerializeField] GameObject hitEffect = null;
+        [SerializeField] GameObject[] destroyOnHit = null;
 
         Health target = null;
         float damage = 0;
@@ -36,6 +39,8 @@ namespace RPG.Combat
         {
             this.target = target;
             this.damage = damage;
+
+            Destroy(gameObject, maxLifeTime);
         }
 
         //Gets middle of the target capsule collider
@@ -50,12 +55,21 @@ namespace RPG.Combat
         {
             if (other.GetComponent<Health>() != target) return;
             if (target.IsDead()) return;
+            target.TakeDamage(damage);
+
+            projectileSpeed = 0;
+
             if (hitEffect != null)
             {
                 Instantiate(hitEffect, GetAimLocation(), transform.rotation);
             }
-            target.TakeDamage(damage);
-            Destroy(gameObject);
+
+            foreach(GameObject toDestroy in destroyOnHit)
+            {
+                Destroy(toDestroy);
+            }
+
+            Destroy(gameObject, lifeAfterImpact);
         }
     }
 }
