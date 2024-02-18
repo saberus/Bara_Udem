@@ -7,6 +7,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 942397022488901466, guid: 7ca40aac2f4f9e842a6ab18119bbf82f, type: 3}
+      propertyPath: characterClass
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2744397470733447658, guid: 7ca40aac2f4f9e842a6ab18119bbf82f, type: 3}
       propertyPath: defaultWeapon
       value: 

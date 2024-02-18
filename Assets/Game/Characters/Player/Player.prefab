@@ -86,6 +86,14 @@ PrefabInstance:
       propertyPath: healthPoints
       value: 30
       objectReference: {fileID: 0}
+    - target: {fileID: 375564881940544132, guid: 9c9cde784878b7741856ba6c359908a3, type: 3}
+      propertyPath: startingLevel
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 375564881940544132, guid: 9c9cde784878b7741856ba6c359908a3, type: 3}
+      propertyPath: characterClass
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3329384610902015028, guid: 9c9cde784878b7741856ba6c359908a3, type: 3}
       propertyPath: weapon
       value: 
@@ -232,3 +240,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6288473bd181f7e42bd9eb008a0190b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &4100191423884502828
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4597013254097561605}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08d9b18d0f28aae43a35df6e7cc0be2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  experiencePoints: 0

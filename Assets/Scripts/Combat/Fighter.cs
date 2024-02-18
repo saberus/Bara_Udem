@@ -1,7 +1,7 @@
 ﻿using RPG.Core;
 using RPG.Movement;
 using RPG.Saving;
-using System;
+using RPG.Attributes;
 using UnityEngine;
 
 namespace RPG.Combat
@@ -44,6 +44,8 @@ namespace RPG.Combat
                 }
             }
         }
+
+        public Health Target { get => target; }
 
         public bool CanAttack(GameObject combatTarget)
         {
@@ -100,10 +102,10 @@ namespace RPG.Combat
             if (target == null) return;
             if (currentWeapon.HasProjectile())
             {
-                currentWeapon.LaunchProjectile(rightHandTransform, leftHandTransform, target);
+                currentWeapon.LaunchProjectile(rightHandTransform, leftHandTransform, target, gameObject);
             } else
             {
-                target.TakeDamage(currentWeapon.WeaponDamage);
+                target.TakeDamage(gameObject, currentWeapon.WeaponDamage);
             }
         }
 
