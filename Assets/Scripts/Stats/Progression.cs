@@ -11,26 +11,9 @@ namespace RPG.Stats
 
         Dictionary<CharacterClass, Dictionary<Stat, float[]>> lookupTable = null;
 
-        //private void Start()
-        //{
-        //    BuildLookup();
-        //}
-
         public float GetStat(Stat stat, CharacterClass characterClass, int level)
         {
             BuildLookup();
-
-            //foreach (ProgressionCharacterClass progressionCharacter in characterClasses)
-            //{
-            //    if (progressionCharacter.characterClass != characterClass) continue;
-
-            //    foreach(ProgressionStat progressionStat in progressionCharacter.stats)
-            //    {
-            //        if (progressionStat.stat != stat) continue;
-            //        if(progressionStat.levels.Length < level) continue;
-            //        return progressionStat.levels[level - 1];
-            //    }
-            //}
             //return 0;
             //TODO: IS IT GOOD?
             //Dictionary<Stat, float[]> statsDictionary = null;
@@ -55,6 +38,7 @@ namespace RPG.Stats
 
         private void BuildLookup()
         {
+            Debug.Log("@@ BuildLookup @@ CALED @@");
             if (lookupTable != null) return;
             lookupTable = new Dictionary<CharacterClass, Dictionary<Stat, float[]>>();
             foreach (ProgressionCharacterClass progressionCharacter in characterClasses)

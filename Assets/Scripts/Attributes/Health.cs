@@ -7,8 +7,7 @@ namespace RPG.Attributes
 {
     public class Health : MonoBehaviour, ISaveable
     {
-        [SerializeField]
-        float healthPoints = 100f;
+        float healthPoints = -1f;
 
         float maxHealthPoints = 0f;
 
@@ -17,7 +16,11 @@ namespace RPG.Attributes
         private void Start()
         {
             float healthFromStats = GetComponent<BaseStats>().GetStat(Stat.Health);
-            healthPoints = healthFromStats;
+
+            if (healthPoints < 0f)
+            {
+                healthPoints = healthFromStats;
+            }
             maxHealthPoints = healthFromStats;
         }
 
