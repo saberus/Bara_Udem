@@ -18,7 +18,7 @@ namespace RPG.Combat
             string healthStringValue = "N/A";
             if(health != null)
             {
-                healthStringValue = string.Format("{0:0}%", health.GetPercentage().ToString());
+                healthStringValue = string.Format("{0:0}/{1:0}", health.HealthPoints.ToString(), health.GetMaxHealthPoints());
             }
             GetComponent<Text>().text = healthStringValue;
         }

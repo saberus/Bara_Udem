@@ -1,22 +1,28 @@
 using RPG.Core;
 using RPG.Saving;
 using RPG.Stats;
+using System;
 using UnityEngine;
 
 namespace RPG.Attributes
 {
     public class Health : MonoBehaviour, ISaveable
     {
+        [SerializeField] float regegenerationPercentage = 70;
+
         float healthPoints = -1f;
 
         float maxHealthPoints = 0f;
 
         bool isDead = false;
 
+        BaseStats baseStats = null;
+
         private void Start()
         {
-            float healthFromStats = GetComponent<BaseStats>().GetStat(Stat.Health);
-
+            baseStats = GetComponent<BaseStats>();
+            float healthFromStats = baseStats.GetStat(Stat.Health);
+            baseStats.onLevelUp += RegenerateHealth;
             if (healthPoints < 0f)
             {
                 healthPoints = healthFromStats;
@@ -41,6 +47,21 @@ namespace RPG.Attributes
                 AwardExperience(instigator);
             }
         }
+        public object CaptureState()
+        {
+            return healthPoints;
+        }
+
+        public void RestoreState(object state)
+        {
+            healthPoints = (float)state;
+            CheckHealth();
+        }
+        private void RegenerateHealth()
+        {
+            float regenHealthPoints = baseStats.GetStat(Stat.Health) * (regegenerationPercentage / 100);
+            healthPoints = Mathf.Max(healthPoints, regenHealthPoints);  
+        }
 
         private void AwardExperience(GameObject instigator)
         {
@@ -50,6 +71,13 @@ namespace RPG.Attributes
             float xp = GetComponent<BaseStats>().GetStat(Stat.ExperienceReward);
             instigator.GetComponent<Experience>().GainExperience(xp);
             
+        }
+
+        public float HealthPoints { get { return healthPoints; } }
+
+        public float GetMaxHealthPoints()
+        {
+            return baseStats.GetStat(Stat.Health);
         }
 
         public float GetPercentage()
@@ -66,16 +94,7 @@ namespace RPG.Attributes
             GetComponent<ActionScheduler>().CancelCurrentAction();
         }
 
-        public object CaptureState()
-        {
-            return healthPoints;
-        }
 
-        public void RestoreState(object state)
-        {
-            healthPoints = (float)state;
-            CheckHealth();
-        }
 
         private void CheckHealth()
         {
