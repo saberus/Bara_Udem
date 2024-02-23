@@ -5,6 +5,7 @@ using RPG.Attributes;
 using System;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
+using GameDevTV.Utils;
 
 namespace RPG.Control
 {
@@ -26,17 +27,27 @@ namespace RPG.Control
 
         int currentWaypointIndex = 0;
 
-        Vector3 guardPosition;
+        LazyValue<Vector3> guardPosition;
         float timeSinceLastSawPlayer = Mathf.Infinity;
         float timeSinceArrivedAtWaypoint = Mathf.Infinity;
 
-        private void Start()
+        private void Awake()
         {
             fighter = GetComponent<Fighter>();
             health = GetComponent<Health>();
             mover = GetComponent<Mover>();
             player = GameObject.FindWithTag("Player");
-            guardPosition = transform.position;
+            guardPosition = new LazyValue<Vector3>(GetGuardPosition);
+        }
+
+        private void Start()
+        {
+            guardPosition.ForceInit();
+        }
+
+        private Vector3 GetGuardPosition()
+        {
+            return transform.position;
         }
 
         private void Update()
@@ -66,7 +77,7 @@ namespace RPG.Control
 
         private void PatrolBehaviour()
         {
-            Vector3 nextPosition = guardPosition;
+            Vector3 nextPosition = guardPosition.value;
 
             if (patrolPath != null)
             {
