@@ -4,10 +4,11 @@ using RPG.Saving;
 using RPG.Attributes;
 using UnityEngine;
 using RPG.Stats;
+using System.Collections.Generic;
 
 namespace RPG.Combat
 {
-    public class Fighter : MonoBehaviour, IAction, ISaveable
+    public class Fighter : MonoBehaviour, IAction, ISaveable, IModifierProvider
     {
         [SerializeField] float timeBetweenAttacks = 1f;
         [SerializeField] Transform rightHandTransform = null;
@@ -83,6 +84,22 @@ namespace RPG.Combat
         public void RestoreState(object state)
         {
             EquipWeapon(Resources.Load<Weapon>(state as string));
+        }
+
+        public IEnumerable<float> GetAdditiveModifiers(Stat stat)
+        {
+            if(stat == Stat.Damage)
+            {
+                yield return currentWeapon.WeaponDamage;
+            }
+        }
+
+        public IEnumerable<float> GetPercentageModifiers(Stat stat)
+        {
+            if(stat == Stat.Damage)
+            {
+                yield return currentWeapon.WeaponPercentageBonus;
+            }
         }
 
         //Handle a shoot animation event

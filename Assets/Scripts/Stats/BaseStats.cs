@@ -13,6 +13,7 @@ namespace RPG.Stats
         [SerializeField] CharacterClass characterClass;
         [SerializeField] Progression progression = null;
         [SerializeField] GameObject levelUpParticleEffect = null;
+        [SerializeField] bool shouldUseModifiers = false;
 
         public event Action onLevelUp;
 
@@ -36,11 +37,9 @@ namespace RPG.Stats
             }
         }
 
-
-
         public float GetStat(Stat stat)
         {
-            return progression.GetStat(stat, characterClass, CurrentLevel);
+            return (GetBaseStat(stat) + GetAdditiveModifier(stat)) * (1 + GetPercentageModifier(stat) / 100);
         }
 
         public int CurrentLevel 
@@ -55,7 +54,42 @@ namespace RPG.Stats
             } 
         }
 
-        public int CalculateLevel()
+        private float GetBaseStat(Stat stat)
+        {
+            return progression.GetStat(stat, characterClass, CurrentLevel);
+        }
+
+        private float GetAdditiveModifier(Stat stat)
+        {
+            if (!shouldUseModifiers) return 0f;
+
+            float total = 0;
+            foreach(IModifierProvider provider in GetComponents<IModifierProvider>())
+            {
+                foreach (float modifier in provider.GetAdditiveModifiers(stat))
+                {
+                    total += modifier;
+                }
+            }
+            return total;
+        }
+
+        private float GetPercentageModifier(Stat stat)
+        {
+            if (!shouldUseModifiers) return 0f;
+
+            float total = 0;
+            foreach (IModifierProvider provider in GetComponents<IModifierProvider>())
+            {
+                foreach (float modifier in provider.GetPercentageModifiers(stat))
+                {
+                    total += modifier;
+                }
+            }
+            return total;
+        }
+
+        private int CalculateLevel()
         {
 
             Experience experience = GetComponent<Experience>();
@@ -73,6 +107,8 @@ namespace RPG.Stats
 
             return penultimateLevel + 1;
         }
+
+
 
         private void LevelUpEffect()
         {
