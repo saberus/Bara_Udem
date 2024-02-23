@@ -26,17 +26,6 @@ namespace RPG.Stats
             if (experience != null) experience.onExperienceGained += UpdateLevel;
         }
 
-        private void UpdateLevel()
-        {
-            int newLevel = CalculateLevel();
-            if(newLevel > startingLevel)
-            {
-                currentLevel = newLevel;
-                LevelUpEffect();
-                onLevelUp();
-            }
-        }
-
         public float GetStat(Stat stat)
         {
             return (GetBaseStat(stat) + GetAdditiveModifier(stat)) * (1 + GetPercentageModifier(stat) / 100);
@@ -52,6 +41,17 @@ namespace RPG.Stats
                 }
                 return currentLevel; 
             } 
+        }
+
+        private void UpdateLevel()
+        {
+            int newLevel = CalculateLevel();
+            if (newLevel > startingLevel)
+            {
+                currentLevel = newLevel;
+                LevelUpEffect();
+                onLevelUp();
+            }
         }
 
         private float GetBaseStat(Stat stat)

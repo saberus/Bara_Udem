@@ -13,9 +13,7 @@ namespace RPG.Movement
 
         Health health;
         NavMeshAgent navMeshAgent;
-
-        // Start is called before the first frame update
-        void Start()
+        private void Awake()
         {
             navMeshAgent = GetComponent<NavMeshAgent>();
             health = GetComponent<Health>();
