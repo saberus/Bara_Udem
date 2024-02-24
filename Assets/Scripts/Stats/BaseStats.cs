@@ -1,7 +1,5 @@
-using RPG.Attributes;
+using GameDevTV.Utils;
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace RPG.Stats
@@ -17,24 +15,29 @@ namespace RPG.Stats
 
         public event Action onLevelUp;
 
-        int currentLevel = 0;
+        LazyValue<int> currentLevel;
 
-        private void Start()
+        Experience experience;
+
+        private void Awake()
         {
-            currentLevel = CalculateLevel();
-            Experience experience = GetComponent<Experience>();
+            experience = GetComponent<Experience>();
+            currentLevel = new LazyValue<int>(CalculateLevel);
+        }
+
+        private void OnEnable()
+        {
             if (experience != null) experience.onExperienceGained += UpdateLevel;
         }
 
-        private void UpdateLevel()
+        private void OnDisable()
         {
-            int newLevel = CalculateLevel();
-            if(newLevel > startingLevel)
-            {
-                currentLevel = newLevel;
-                LevelUpEffect();
-                onLevelUp();
-            }
+            if (experience != null) experience.onExperienceGained -= UpdateLevel;
+        }
+
+        private void Start()
+        {
+            currentLevel.ForceInit();
         }
 
         public float GetStat(Stat stat)
@@ -42,21 +45,22 @@ namespace RPG.Stats
             return (GetBaseStat(stat) + GetAdditiveModifier(stat)) * (1 + GetPercentageModifier(stat) / 100);
         }
 
-        public int CurrentLevel 
+        public int CurrentLevel { get { return currentLevel.value; } }
+
+        private void UpdateLevel()
         {
-            get 
-            { 
-                if(currentLevel < 1)
-                {
-                    CalculateLevel();
-                }
-                return currentLevel; 
-            } 
+            int newLevel = CalculateLevel();
+            if (newLevel > startingLevel)
+            {
+                currentLevel.value = newLevel;
+                LevelUpEffect();
+                onLevelUp();
+            }
         }
 
         private float GetBaseStat(Stat stat)
         {
-            return progression.GetStat(stat, characterClass, CurrentLevel);
+            return progression.GetStat(stat, characterClass, currentLevel.value);
         }
 
         private float GetAdditiveModifier(Stat stat)
