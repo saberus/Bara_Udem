@@ -4,12 +4,14 @@ using RPG.Saving;
 using RPG.Stats;
 using System;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace RPG.Attributes
 {
     public class Health : MonoBehaviour, ISaveable
     {
         [SerializeField] float regegenerationPercentage = 70;
+        [SerializeField] UnityEvent<float> takeDamage;
 
         LazyValue<float> healthPoints;
 
@@ -55,12 +57,15 @@ namespace RPG.Attributes
         {
             print(name + " taking " + damage + " damage");
             healthPoints.value = Mathf.Max(healthPoints.value - damage, 0);
-
-            print(healthPoints);
+            
+            //print(healthPoints);
             CheckHealth();
             if (isDead)
             {
                 AwardExperience(instigator);
+            } else
+            {
+                takeDamage.Invoke(damage);
             }
         }
         public object CaptureState()
@@ -98,7 +103,12 @@ namespace RPG.Attributes
 
         public float GetPercentage()
         {
-            return (healthPoints.value * 100) / maxHealthPoints.value;
+            return 100 * GetHealthFraction();
+        }
+
+        public float GetHealthFraction()
+        {
+            return healthPoints.value / maxHealthPoints.value;
         }
 
         private void Die()
