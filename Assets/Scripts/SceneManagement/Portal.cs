@@ -62,7 +62,7 @@ namespace RPG.SceneManagement
             wrapper.Save();
             
             yield return new WaitForSeconds(fadeWaitTime);
-            yield return fader.FadeIn(fadeInTime);
+            fader.FadeIn(fadeInTime);
 
             //restore control here for new player
             playerControllerNew.enabled = true;
