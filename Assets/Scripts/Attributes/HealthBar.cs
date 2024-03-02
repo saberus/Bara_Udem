@@ -11,6 +11,8 @@ namespace RPG.Attributes
 
         void Update()
         {
+            print("fraction in health bar : " + health.GetHealthFraction());
+            //TODO: fix aproximation, cantvas not disabling. NAN for some reason 
             if(Mathf.Approximately(health.GetHealthFraction(), 0)
             || Mathf.Approximately(health.GetHealthFraction(), 1))
             {
