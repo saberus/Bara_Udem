@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3651620869898089087}
   - component: {fileID: 5975578200951509474}
   m_Layer: 0
-  m_Name: Equipped_Sword
+  m_Name: Equipped_Unarmed
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29,7 +29,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2308641888710549056}
   - {fileID: 9107262507058134806}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -91,7 +90,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3651620869898089087}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &5772450698494663466
 AudioSource:
@@ -103,7 +102,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: ecb1846d8f5334e4098e073700dc88fb, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 94fc62564eabf2e429355affe6bee585, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -189,65 +188,3 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!1001 &2308641888710337614
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 3651620869898089087}
-    m_Modifications:
-    - target: {fileID: 181534, guid: 13af847dfa6dbe844ba4b7c902f98f67, type: 3}
-      propertyPath: m_Name
-      value: SM_Wep_Sword_01
-      objectReference: {fileID: 0}
-    - target: {fileID: 489998, guid: 13af847dfa6dbe844ba4b7c902f98f67, type: 3}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 489998, guid: 13af847dfa6dbe844ba4b7c902f98f67, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.082
-      objectReference: {fileID: 0}
-    - target: {fileID: 489998, guid: 13af847dfa6dbe844ba4b7c902f98f67, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.055
-      objectReference: {fileID: 0}
-    - target: {fileID: 489998, guid: 13af847dfa6dbe844ba4b7c902f98f67, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.139
-      objectReference: {fileID: 0}
-    - target: {fileID: 489998, guid: 13af847dfa6dbe844ba4b7c902f98f67, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.6868069
-      objectReference: {fileID: 0}
-    - target: {fileID: 489998, guid: 13af847dfa6dbe844ba4b7c902f98f67, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0.7078255
-      objectReference: {fileID: 0}
-    - target: {fileID: 489998, guid: 13af847dfa6dbe844ba4b7c902f98f67, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0.079450905
-      objectReference: {fileID: 0}
-    - target: {fileID: 489998, guid: 13af847dfa6dbe844ba4b7c902f98f67, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0.14479971
-      objectReference: {fileID: 0}
-    - target: {fileID: 489998, guid: 13af847dfa6dbe844ba4b7c902f98f67, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: -84.436
-      objectReference: {fileID: 0}
-    - target: {fileID: 489998, guid: 13af847dfa6dbe844ba4b7c902f98f67, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 98.695
-      objectReference: {fileID: 0}
-    - target: {fileID: 489998, guid: 13af847dfa6dbe844ba4b7c902f98f67, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: -116.964
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 13af847dfa6dbe844ba4b7c902f98f67, type: 3}
---- !u!4 &2308641888710549056 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 489998, guid: 13af847dfa6dbe844ba4b7c902f98f67, type: 3}
-  m_PrefabInstance: {fileID: 2308641888710337614}
-  m_PrefabAsset: {fileID: 0}
