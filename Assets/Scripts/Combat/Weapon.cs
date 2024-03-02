@@ -4,7 +4,7 @@ namespace RPG.Combat
 {
     public class Weapon : MonoBehaviour
     {
-        public void onHit()
+        public void OnHit()
         {
 
         }

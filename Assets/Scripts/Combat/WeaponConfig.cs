@@ -20,14 +20,17 @@ namespace RPG.Combat
         public float WeaponRange { get => weaponRange; }
         public float WeaponPercentageBonus { get => weaponPercentageBonus;}
 
-        public void Spawn(Transform rightHand, Transform leftHand, Animator animator)
+        public Weapon Spawn(Transform rightHand, Transform leftHand, Animator animator)
         {
             DestroyOldWeapon(rightHand, leftHand);
-            if(equippedPrefab != null)
+
+            Weapon weapon = null;
+
+            if (equippedPrefab != null)
             {
                 Transform handTransform = GetTransform(rightHand, leftHand);
 
-                Weapon weapon = Instantiate(equippedPrefab, handTransform);
+                weapon = Instantiate(equippedPrefab, handTransform);
                 weapon.gameObject.name = weaponName;
             }
             var overrideController = animator.runtimeAnimatorController as AnimatorOverrideController;
@@ -42,6 +45,8 @@ namespace RPG.Combat
                 animator.runtimeAnimatorController = overrideController.runtimeAnimatorController;
 
             }
+
+            return weapon;
         }
 
         public void LaunchProjectile(Transform rightHand, Transform leftHand, Health target, GameObject instigator, float calculatedDamage)
