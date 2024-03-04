@@ -38,7 +38,7 @@ namespace RPG.Stats
 
         private void BuildLookup()
         {
-            Debug.Log("@@ BuildLookup @@ CALED @@");
+            //Debug.Log("@@ BuildLookup @@ CALED @@");
             if (lookupTable != null) return;
             lookupTable = new Dictionary<CharacterClass, Dictionary<Stat, float[]>>();
             foreach (ProgressionCharacterClass progressionCharacter in characterClasses)

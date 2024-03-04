@@ -11,15 +11,13 @@ namespace RPG.Attributes
 
         void Update()
         {
-            print("fraction in health bar : " + health.GetHealthFraction());
-            //TODO: fix aproximation, cantvas not disabling. NAN for some reason 
-            if(Mathf.Approximately(health.GetHealthFraction(), 0)
-            || Mathf.Approximately(health.GetHealthFraction(), 1))
+            float healthFraction = health.GetHealthFraction();
+            if (Mathf.Approximately(healthFraction, 0)
+            || Mathf.Approximately(healthFraction, 1))
             {
                 rootCanvas.enabled = false;
                 return;
             }
-
             rootCanvas.enabled = true;
             foreground.rectTransform.localScale = new Vector3(Mathf.Min(health.GetHealthFraction(), 1), 1, 1);
         }

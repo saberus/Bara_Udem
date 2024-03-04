@@ -26,7 +26,7 @@ namespace RPG.Attributes
         {
             baseStats = GetComponent<BaseStats>();
             healthPoints = new LazyValue<float>(GetInitialHealth);
-            maxHealthPoints = healthPoints;
+            maxHealthPoints = new LazyValue<float>(GetMaxHealthPoints);
         }
 
         private float GetInitialHealth()
@@ -37,6 +37,7 @@ namespace RPG.Attributes
         private void Start()
         {
             healthPoints.ForceInit();
+            maxHealthPoints.ForceInit();
         }
 
         private void OnEnable()
